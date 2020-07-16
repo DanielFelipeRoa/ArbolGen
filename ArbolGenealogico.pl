@@ -1,33 +1,45 @@
+padre(diego,maria).
+padre(natalia,maria).
+padre(diego,steve).
+padre(natalia,steve).
+padre(diego,daniel).
+padre(natalia,daniel).
+padre(diego,laura).
+padre(natalia,laura).
+padre(steve,jose).
+padre(daniela,jose).
+padre(daniel,cristian).
+padre(daniela,cristian).
+padre(jose,rosa).
+padre(ruth,rosa).
+padre(jose,felipe).
+padre(ruth,felipe).
+padre(jose,nicolas).
+padre(ruth,nicolas).
+padre(nicolas,diana).
+padre(gabriela,diana).
+padre(nicolas,alejandro).
+padre(gabriela,alejandro).
+padre(nicolas,alejandra).
+padre(gabriela,alejandra).
+padre(brandon,sebastian).
+padre(alejandra,sebastian).
+padre(sebastian,andres).
+padre(diana,andres).
 
-padre(ivan,steve).
-padre(brandon,manuel).
-padre(juan,mario).
-padre(steve,raul).
-padre(raul,brandon).
-padre(raul,juan).
-hermano(brandon,juan).
-hermano(steve,daniela).
-hermano(sandra,ana).
-madre(maria,steve).
-madre(maria,daniela).
-madre(ana,mario).
-madre(sandra,manuel).
-mujer(sandra).
-mujer(ana).
-mujer(maria).
-mujer(daniela).
--mujer(ivan).
--mujer(steve).
--mujer(brandon).
--mujer(manuel).
--mujer(juan).
--mujer(mario).
--mujer(raul).
+nieto(X,Y):- padre(Y,C), padre(C,X).
+casados(X,Y):- padre(X,Z),padre(Y,Z).
+felices(X):- casados(X,_).
+esHermano(X, Y):- padre(Z, X),padre(Z, Y).
+esTio(X, Y):- padre(Z, Y),esHermano(Z, X).
+esPrimo(X, Y):- padre(Z, X),esTio(Z, Y).
+esAbuelo(X, Y):- padre(X,Z),padre(Z, Y).
 
-nieto(X,Y):-padre(Y,C),padre(C,X),-mujer(Y).
-tia(X,Y):-(padre(C,Y);madre(C,Y)),hermano(C,X),mujer(X).
-primohermano(X,Y):-(padre(C,X);madre(C,X)),(padre(Z,Y);madre(Z,Y)),hermano(C,Z).
-abuelapaterna(X,Y):-padre(C,Y),-mujer(C),madre(X,C).
-bisabuelo(X,Y):-padre(X,C),(padre(C,Z);madre(C,Z)),(padre(Z,Y);madre(Z,Y)),-mujer(X).
-esHermano(X, Y): Padre(Z, X), Padre(Z, Y).
-esTio(X, Y): Padre(Z, Y), esHermano(Z, X).
+familiarde(A,B) :- padre(A,B).
+familiarde(A,B) :- esHermano(A,B).
+familiarde(A,B) :- esTio(A,B).
+familiarde(A,B) :- esPrimo(A,B).
+familiarde(A,B) :- esAbuelo(A,B).
+familiarde(A,B) :- nieto(A,B).
+
+familiaresDe(X,L):- findall(B,familiarde(X,B),L).
