@@ -1,2 +1,2 @@
-# ArbolGen
-Implementación de un arbol genealógico especificando la relación entre personas
+# Relacion Familiar
+Definir las relaciones entre 3 generaciones de una familia con programación lógica
