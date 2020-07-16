@@ -29,3 +29,5 @@ tia(X,Y):-(padre(C,Y);madre(C,Y)),hermano(C,X),mujer(X).
 primohermano(X,Y):-(padre(C,X);madre(C,X)),(padre(Z,Y);madre(Z,Y)),hermano(C,Z).
 abuelapaterna(X,Y):-padre(C,Y),-mujer(C),madre(X,C).
 bisabuelo(X,Y):-padre(X,C),(padre(C,Z);madre(C,Z)),(padre(Z,Y);madre(Z,Y)),-mujer(X).
+esHermano(X, Y): Padre(Z, X), Padre(Z, Y).
+esTio(X, Y): Padre(Z, Y), esHermano(Z, X).
